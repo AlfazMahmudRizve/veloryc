@@ -29,20 +29,18 @@
   --hero-gradient: radial-gradient(circle at 50% 50%, #fafaf9 0%, #e7e5e4 100%);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0C0A09;
-    /* Stone-950 */
-    --foreground: #E7E5E4;
-    /* Stone-200 */
-    --color-primary: #E7E5E4;
-    --color-secondary: #A8A29E;
-    --color-text-primary: #E7E5E4;
-    --color-text-secondary: #A8A29E;
+[data-theme='dark'] {
+  --background: #0C0A09;
+  /* Stone-950 */
+  --foreground: #E7E5E4;
+  /* Stone-200 */
+  --color-primary: #E7E5E4;
+  --color-secondary: #A8A29E;
+  --color-text-primary: #E7E5E4;
+  --color-text-secondary: #A8A29E;
 
-    --background-secondary: #1C1917;
-    --hero-gradient: radial-gradient(circle at 50% 50%, #1c1917 0%, #0c0a09 100%);
-  }
+  --background-secondary: #1C1917;
+  --hero-gradient: radial-gradient(circle at 50% 50%, #1c1917 0%, #0c0a09 100%);
 }
 
 html,

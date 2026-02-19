@@ -27,6 +27,8 @@
 
   --background-secondary: #F5F5F4;
   --hero-gradient: radial-gradient(circle at 50% 50%, #fafaf9 0%, #e7e5e4 100%);
+  --navbar-bg-scrolled: rgba(255, 255, 255, 0.9);
+  --navbar-border: rgba(0, 0, 0, 0.05);
 }
 
 [data-theme='dark'] {
@@ -41,6 +43,8 @@
 
   --background-secondary: #1C1917;
   --hero-gradient: radial-gradient(circle at 50% 50%, #1c1917 0%, #0c0a09 100%);
+  --navbar-bg-scrolled: rgba(0, 0, 0, 0.8);
+  --navbar-border: rgba(255, 255, 255, 0.05);
 }
 
 html,

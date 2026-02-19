@@ -23,9 +23,36 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    // Lock scroll when mobile menu is open
+    useEffect(() => {
+        if (isMenuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+    }, [isMenuOpen]);
+
     return (
         <>
             <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''}`}>
+
+                {/* Mobile Menu Button - Left Aligned or where appropriate? Usually right or left. 
+                    Structure: Logo - Links - Actions. 
+                    Let's put Hamburger on the left or replace Links with Hamburger on Mobile.
+                */}
+                <button
+                    className={styles.hamburger}
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    aria-label="Toggle menu"
+                >
+                    {/* Simple Hamburger icon or animated spans */}
+                    <span style={{ transform: isMenuOpen ? 'rotate(45deg)' : 'rotate(0)' }} />
+                    <span style={{ opacity: isMenuOpen ? '0' : '1', transform: isMenuOpen ? 'translateX(20px)' : 'translateX(0)' }} />
+                    <span style={{ transform: isMenuOpen ? 'rotate(-45deg)' : 'rotate(0)' }} />
+                </button>
+
                 <div className={styles.logo}>
                     <Link href="/">veloryc.</Link>
                 </div>
@@ -46,6 +73,14 @@ export default function Navbar() {
                     </button>
                 </div>
             </nav>
+
+            {/* Mobile Menu Overlay */}
+            <div className={`${styles.mobileMenu} ${isMenuOpen ? styles.open : ''}`}>
+                <Link href="/shop" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>Serums</Link>
+                <Link href="/about" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>Science</Link>
+                <Link href="/quiz" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>Skin Quiz</Link>
+            </div>
+
             <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
         </>
     );

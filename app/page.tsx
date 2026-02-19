@@ -39,7 +39,7 @@ export default function Home() {
         <div className={styles.grid}>
           {/* Placeholders for products */}
 
-          <div className={styles.card}>
+          <Link href="/product/vitamin-c-serum" className={styles.card}>
             <div className={`${styles.imagePlaceholder} ${styles.accentC}`}>
               <Image
                 src={PRODUCTS['vitamin-c-serum'].image}
@@ -51,8 +51,8 @@ export default function Home() {
             </div>
             <h3>Vitamin C Brightening</h3>
             <p>৳ 5,800</p>
-          </div>
-          <div className={styles.card}>
+          </Link>
+          <Link href="/product/hyaluronic-serum" className={styles.card}>
             <div className={`${styles.imagePlaceholder} ${styles.accentHa}`}>
               <Image
                 src={PRODUCTS['hyaluronic-serum'].image}
@@ -64,8 +64,8 @@ export default function Home() {
             </div>
             <h3>Hyaluronic Hydration</h3>
             <p>৳ 4,950</p>
-          </div>
-          <div className={styles.card}>
+          </Link>
+          <Link href="/product/niacinamide-serum" className={styles.card}>
             <div className={`${styles.imagePlaceholder} ${styles.accentNia}`}>
               <Image
                 src={PRODUCTS['niacinamide-serum'].image}
@@ -77,7 +77,7 @@ export default function Home() {
             </div>
             <h3>Niacinamide Clarifying</h3>
             <p>৳ 5,200</p>
-          </div>
+          </Link>
         </div>
       </section>
 

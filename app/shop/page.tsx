@@ -29,7 +29,7 @@ export default function ShopPage() {
                             </div>
                             <div className={styles.cardContent}>
                                 <h3 className={styles.productName}>{product.name}</h3>
-                                <p className={styles.productPrice}>${product.price.toFixed(2)}</p>
+                                <p className={styles.productPrice}>৳ {product.price.toLocaleString()}</p>
                             </div>
                         </Link>
                     ))}

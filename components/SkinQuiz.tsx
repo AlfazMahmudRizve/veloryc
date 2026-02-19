@@ -46,14 +46,36 @@ export default function SkinQuiz() {
     };
 
     const getRecommendation = () => {
-        // Simple logic mapping
-        const { concern } = answers;
-        if (concern === 'dullness') return { name: 'Vitamin C Brightening Serum', slug: 'vitamin-c-serum', imageColor: '#FB923C' };
-        if (concern === 'dehydration') return { name: 'Hyaluronic Hydration Serum', slug: 'hyaluronic-serum', imageColor: '#7DD3FC' };
-        if (concern === 'acne') return { name: 'Niacinamide Clarifying Serum', slug: 'niacinamide-serum', imageColor: '#A7F3D0' };
-        if (concern === 'aging') return { name: 'Retinol Anti-Aging Serum', slug: 'retinol-serum', imageColor: '#F472B6' };
+        const { skinType, concern, sensitivity } = answers;
 
-        // Fallback
+        // Logic: Prioritize sensitivity, then specific concern + skin type combos
+
+        // 1. Sensitive Skin Guard
+        if (sensitivity === 'yes') {
+            // Avoid harsh actives like Retinol or high Vit C if possible, recommend Hyaluronic or Niacinamide
+            if (concern === 'aging') return { name: 'Hyaluronic Hydration Serum', slug: 'hyaluronic-serum', imageColor: '#7DD3FC' }; // Retinol too harsh
+            if (concern === 'acne') return { name: 'Niacinamide Clarifying Serum', slug: 'niacinamide-serum', imageColor: '#A7F3D0' }; // Niacinamide is usually okay
+            return { name: 'Hyaluronic Hydration Serum', slug: 'hyaluronic-serum', imageColor: '#7DD3FC' }; // Safe bet
+        }
+
+        // 2. Specific Combinations
+        if (concern === 'aging') {
+            return { name: 'Retinol Anti-Aging Serum', slug: 'retinol-serum', imageColor: '#F472B6' };
+        }
+
+        if (concern === 'acne' || (skinType === 'oily' && concern === 'dullness')) {
+            return { name: 'Niacinamide Clarifying Serum', slug: 'niacinamide-serum', imageColor: '#A7F3D0' };
+        }
+
+        if (concern === 'dullness') {
+            return { name: 'Vitamin C Brightening Serum', slug: 'vitamin-c-serum', imageColor: '#FB923C' };
+        }
+
+        if (concern === 'dehydration' || skinType === 'dry') {
+            return { name: 'Hyaluronic Hydration Serum', slug: 'hyaluronic-serum', imageColor: '#7DD3FC' };
+        }
+
+        // Default Fallback
         return { name: 'Hyaluronic Hydration Serum', slug: 'hyaluronic-serum', imageColor: '#7DD3FC' };
     };
 

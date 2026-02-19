@@ -22,7 +22,7 @@ export default function BrandPhilosophy() {
                 </div>
                 <div className={styles.imageWrapper}>
                     <Image
-                        src="https://images.unsplash.com/photo-1556228720-1957be9b9406?auto=format&fit=crop&w=800&q=80"
+                        src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=800&q=80"
                         alt="Veloryc Minimalist Philosophy"
                         fill
                         style={{ objectFit: 'cover' }}

@@ -34,7 +34,7 @@ export default function StickyATC({ product }: { product: Product }) {
             <div className={styles.container}>
                 <div className={styles.info}>
                     <span className={styles.name}>{product.name}</span>
-                    <span className={styles.price}>${product.price.toFixed(2)}</span>
+                    <span className={styles.price}>৳ {product.price.toLocaleString()}</span>
                 </div>
                 <button
                     className="btn btn-primary"

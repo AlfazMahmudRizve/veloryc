@@ -20,15 +20,8 @@ export async function generateStaticParams() {
     }));
 }
 
-export default async function ProductPage({ params }: PageProps) {
-    // In Next.js 15, params might be a Promise. To be safe/future-proof:
-    // const { slug } = await params;
-    // But for now, let's assume standard behavior or fix if build fails.
-
-    // Actually, let's await it to be safe as Next 15 is shifting.
-    // However, TypeScript might complain if the type doesn't match Promise.
-    // For this environment (create-next-app default), I'll stick to direct access but keep it in mind.
-
+export default async function ProductPage(props: { params: Promise<{ slug: string }> }) {
+    const params = await props.params;
     const product = PRODUCTS[params.slug];
 
     if (!product) {
@@ -58,7 +51,7 @@ export default async function ProductPage({ params }: PageProps) {
                 <div className={styles.details}>
                     <span className={styles.subtitle}>{product.subtitle}</span>
                     <h1 className={styles.title}>{product.name}</h1>
-                    <p className={styles.price}>${product.price.toFixed(2)}</p>
+                    <p className={styles.price}>৳ {product.price.toLocaleString()}</p>
 
                     <VariantSelector currentSlug={product.slug} />
 

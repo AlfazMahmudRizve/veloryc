@@ -50,7 +50,7 @@ export default function Home() {
               />
             </div>
             <h3>Vitamin C Brightening</h3>
-            <p>$48.00</p>
+            <p>৳ 5,800</p>
           </div>
           <div className={styles.card}>
             <div className={`${styles.imagePlaceholder} ${styles.accentHa}`}>
@@ -63,7 +63,7 @@ export default function Home() {
               />
             </div>
             <h3>Hyaluronic Hydration</h3>
-            <p>$42.00</p>
+            <p>৳ 4,950</p>
           </div>
           <div className={styles.card}>
             <div className={`${styles.imagePlaceholder} ${styles.accentNia}`}>
@@ -76,7 +76,7 @@ export default function Home() {
               />
             </div>
             <h3>Niacinamide Clarifying</h3>
-            <p>$45.00</p>
+            <p>৳ 5,200</p>
           </div>
         </div>
       </section>

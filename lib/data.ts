@@ -22,7 +22,7 @@ export const PRODUCTS: Record<string, Product> = {
         name: 'Vitamin C Brightening Serum',
         subtitle: 'Radiance & Even Tone',
         description: 'A potent antioxidant blend designed to brighten complexion, reduce dark spots, and protect against environmental stressors.',
-        price: 48.00,
+        price: 5800,
         variance: 'vitamin-c',
         activeIngredients: [
             { name: 'L-Ascorbic Acid', percentage: '15%', description: 'Pure Vitamin C to brighten and firm.' },
@@ -40,7 +40,7 @@ export const PRODUCTS: Record<string, Product> = {
         name: 'Hyaluronic Hydration Serum',
         subtitle: 'Deep Moisture & Plumping',
         description: 'Multi-molecular weight hyaluronic acid penetrates deep into the skin layers for lasting hydration and visible plumping.',
-        price: 42.00,
+        price: 4950,
         variance: 'hyaluronic',
         activeIngredients: [
             { name: 'Hyaluronic Acid', percentage: '2%', description: 'Binds moisture to the skin.' },
@@ -57,7 +57,7 @@ export const PRODUCTS: Record<string, Product> = {
         name: 'Niacinamide Clarifying Serum',
         subtitle: 'Pore Refining & Oil Control',
         description: 'High-strength vitamin and mineral blemish formula to reduce the appearance of skin blemishes and congestion.',
-        price: 45.00,
+        price: 5200,
         variance: 'niacinamide',
         activeIngredients: [
             { name: 'Niacinamide', percentage: '10%', description: 'Reduces appearance of skin blemishes.' },
@@ -67,5 +67,22 @@ export const PRODUCTS: Record<string, Product> = {
         skinType: ['Oily', 'Combination', 'Acne-Prone'],
         usage: 'Apply to entire face morning and evening before heavier creams.',
         image: 'https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&w=800&q=80'
+    },
+    'retinol-serum': {
+        id: '4',
+        slug: 'retinol-serum',
+        name: 'Retinol Anti-Aging Serum',
+        subtitle: 'Renew & Resurface',
+        description: 'A stable retinol emulsion to target general signs of skin aging, rough texture, and uneven skin tone.',
+        price: 6500,
+        variance: 'retinol',
+        activeIngredients: [
+            { name: 'Retinol', percentage: '0.5%', description: 'Promotes cell turnover and collagen production.' },
+            { name: 'Squalane', percentage: '2%', description: 'Hydrates and prevents moisture loss.' }
+        ],
+        benefits: ['Resurfaces', 'Smooths', 'Anti-Aging'],
+        skinType: ['Normal', 'Dry', 'Mature'],
+        usage: 'Apply small amount in the PM. Use sun protection during the day.',
+        image: 'https://images.unsplash.com/photo-1620916297397-a4a5402a3c6c?auto=format&fit=crop&w=800&q=80'
     }
 };

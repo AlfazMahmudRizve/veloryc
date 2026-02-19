@@ -19,7 +19,8 @@ const VARIANTS = [
 const PRODUCT_MAP = [
     { id: 'vitamin-c', urlSlug: 'vitamin-c-serum', color: 'var(--color-accent-c)', label: 'Vitamin C' },
     { id: 'hyaluronic', urlSlug: 'hyaluronic-serum', color: 'var(--color-accent-ha)', label: 'Hyaluronic' },
-    // Adding placeholders for others if they exist in data, or I'll stick to the 2 I created.
+    { id: 'niacinamide', urlSlug: 'niacinamide-serum', color: 'var(--color-accent-nia)', label: 'Niacinamide' },
+    { id: 'retinol', urlSlug: 'retinol-serum', color: 'var(--color-accent-ret)', label: 'Retinol' }
 ];
 
 export default function VariantSelector({ currentSlug }: { currentSlug: string }) {

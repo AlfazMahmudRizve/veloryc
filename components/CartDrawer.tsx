@@ -22,7 +22,7 @@ function CartItems() {
                         <p style={{ fontSize: '0.8rem', opacity: 0.7 }}>Quantity: {item.quantity}</p>
                     </div>
                     <div style={{ textAlign: 'right' }}>
-                        <p>${(item.price * item.quantity).toFixed(2)}</p>
+                        <p>৳ {(item.price * item.quantity).toLocaleString()}</p>
                         <button onClick={() => removeItem(item.id)} style={{ fontSize: '0.7rem', textDecoration: 'underline', border: 'none', background: 'none', cursor: 'pointer' }}>Remove</button>
                     </div>
                 </div>
@@ -33,7 +33,7 @@ function CartItems() {
 
 function CartTotal() {
     const total = useCartStore((state) => state.total);
-    return <span>${total.toFixed(2)}</span>;
+    return <span>৳ {total.toLocaleString()}</span>;
 }
 
 export default function CartDrawer() {

@@ -1,0 +1,101 @@
+.main {
+    padding-top: calc(var(--header-height) + 40px);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+}
+
+.gallery {
+    position: sticky;
+    top: calc(var(--header-height) + 24px);
+    height: fit-content;
+}
+
+.imagePlaceholder {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-secondary);
+    border-radius: 8px;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+    /* Soft shadow for depth */
+}
+
+/* Variance accent colors */
+.imagePlaceholder.vitamin-c {
+    background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+}
+
+.imagePlaceholder.hyaluronic {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+}
+
+.imagePlaceholder.niacinamide {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+}
+
+.imagePlaceholder.retinol {
+    background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 80px;
+}
+
+.subtitle {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.875rem;
+    color: var(--color-secondary);
+    margin-bottom: 12px;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 24px;
+    line-height: 1.1;
+}
+
+.price {
+    font-size: 1.5rem;
+    margin-bottom: 32px;
+}
+
+.description {
+    line-height: 1.6;
+    margin-bottom: 40px;
+    color: var(--color-secondary);
+}
+
+.actions {
+    margin-bottom: 48px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .gallery {
+        position: relative;
+        top: 0;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+}

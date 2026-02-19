@@ -1,0 +1,54 @@
+.bar {
+    position: fixed;
+    bottom: 0;
+    /* Or top (below header) as per prompt? Prompt said "top or bottom". Bottom is often easier for thumb on mobile. */
+    left: 0;
+    width: 100%;
+    background-color: var(--background);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 16px 24px;
+    z-index: 900;
+    animation: slideUp 0.3s ease-out;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.05);
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+}
+
+.name {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.price {
+    font-size: 0.85rem;
+    color: var(--color-secondary);
+}
+
+@media (min-width: 768px) {
+    .info {
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+    }
+}

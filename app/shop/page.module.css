@@ -1,0 +1,81 @@
+.main {
+    padding-top: var(--header-height);
+    min-height: 100vh;
+    padding-bottom: 80px;
+}
+
+.header {
+    text-align: center;
+    padding: 60px 0 40px;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin-bottom: 16px;
+}
+
+.subtitle {
+    color: var(--color-secondary);
+    font-size: 1.1rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    /* placeholder for potential future hover state logic if needed */
+}
+
+.imageWrapper {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background-color: #f5f5f5;
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    /* Slight rounding for softness */
+    margin-bottom: 16px;
+    transition: transform 0.3s ease;
+}
+
+.card:hover .imageWrapper {
+    transform: scale(0.98);
+}
+
+.cardContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.productName {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.productPrice {
+    color: var(--color-secondary);
+    font-size: 1rem;
+}
+
+/* Variance-specific backgrounds (subtle fallback) */
+.vitamin-c {
+    background-color: rgba(255, 165, 0, 0.1);
+}
+
+.hyaluronic {
+    background-color: rgba(173, 216, 230, 0.1);
+}
+
+.niacinamide {
+    background-color: rgba(144, 238, 144, 0.1);
+}

@@ -245,10 +245,24 @@
 
   .heroImageContainer {
     width: 100%;
-    height: clamp(350px, 50vh, 500px);
+    min-height: 400px;
+    height: 50vh;
+    position: relative;
+    z-index: 5;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 40px;
+    overflow: visible;
+    display: flex;
+    align-items: center;
   }
+
+  .blobSvg {
+    width: 120%;
+    height: 120%;
+    filter: blur(20px);
+    opacity: 0.6;
+  }
+
 
   .grid {
     grid-template-columns: repeat(2, 1fr);

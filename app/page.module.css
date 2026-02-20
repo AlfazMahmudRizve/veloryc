@@ -3,20 +3,15 @@
   padding-top: var(--header-height);
 }
 
+/* ─── Hero ─── */
 .hero {
-  min-height: 80vh;
+  min-height: 85vh;
   display: flex;
   align-items: center;
   background: var(--hero-gradient);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid var(--navbar-border);
   position: relative;
   overflow: hidden;
-}
-
-@media (prefers-color-scheme: dark) {
-  .hero {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  }
 }
 
 .hero>div {
@@ -25,19 +20,20 @@
 }
 
 .title {
-  font-size: 3.5rem;
-  line-height: 1.1;
-  font-weight: 700;
-  margin-bottom: 24px;
-  letter-spacing: -0.05em;
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  line-height: 1.05;
+  font-weight: 400;
+  margin-bottom: 28px;
+  letter-spacing: -0.03em;
 }
 
 .subtitle {
-  font-size: 1.25rem;
-  max-width: 500px;
+  font-size: 1.15rem;
+  max-width: 480px;
   margin-bottom: 48px;
   color: var(--color-secondary);
   font-weight: 400;
+  line-height: 1.7;
 }
 
 .ctaGroup {
@@ -45,78 +41,163 @@
   gap: 16px;
 }
 
+/* ─── Background Decoration ─── */
+.bgShape1 {
+  position: absolute;
+  right: -10%;
+  top: 10%;
+  width: 45%;
+  opacity: 0.35;
+  pointer-events: none;
+  animation: floatShape 12s ease-in-out infinite;
+}
+
+@keyframes floatShape {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-20px) rotate(3deg);
+  }
+}
+
+/* ─── Section Titles ─── */
 .sectionTitle {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 48px;
-  letter-spacing: -0.03em;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 400;
+  margin-bottom: 56px;
+  letter-spacing: -0.02em;
   text-align: center;
 }
 
+/* ─── Product Grid ─── */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 32px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
 }
 
+/* ─── Product Cards ─── */
 .card {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card h3 {
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  transition: color 0.2s ease;
+}
+
+.card p {
+  font-size: 0.95rem;
+  color: var(--color-secondary);
+  font-weight: 500;
+}
+
+.card:hover h3 {
+  color: var(--color-accent-c);
 }
 
 .imagePlaceholder {
   width: 100%;
-  aspect-ratio: 4/5;
-  background-color: white;
-  border-radius: 4px;
-  transition: transform 0.5s ease;
-  position: relative;
+  aspect-ratio: 3/4;
+  background-color: var(--background-secondary);
+  border-radius: 8px;
   overflow: hidden;
+  position: relative;
+  transition: box-shadow 0.4s ease;
 }
 
 .card:hover .imagePlaceholder {
-  transform: scale(1.02);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
 }
 
+.imagePlaceholder img {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover .imagePlaceholder img {
+  transform: scale(1.05);
+}
+
+/* ─── Accent Gradients (Subtle) ─── */
 .accentC {
-  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
-  position: relative;
+  background: linear-gradient(160deg, #fffbf5 0%, #fff4e6 100%);
 }
 
 .accentC::after {
   content: '';
   position: absolute;
-  bottom: 20%;
-  right: 20%;
-  width: 40%;
-  height: 40%;
-  background: radial-gradient(circle, rgba(251, 146, 60, 0.2) 0%, transparent 70%);
-  filter: blur(20px);
+  bottom: 15%;
+  right: 15%;
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(circle, rgba(217, 119, 6, 0.08) 0%, transparent 70%);
+  filter: blur(30px);
+  pointer-events: none;
 }
 
 .accentHa {
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-  position: relative;
+  background: linear-gradient(160deg, #f8fcff 0%, #eef7ff 100%);
 }
 
 .accentHa::after {
   content: '';
   position: absolute;
-  top: 20%;
-  left: 20%;
+  top: 15%;
+  left: 15%;
   width: 50%;
   height: 50%;
-  background: radial-gradient(circle, rgba(125, 211, 252, 0.2) 0%, transparent 70%);
-  filter: blur(20px);
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, transparent 70%);
+  filter: blur(30px);
+  pointer-events: none;
 }
 
 .accentNia {
-  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  background: linear-gradient(160deg, #f5fdf9 0%, #ecfdf5 100%);
+}
+
+.accentNia::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  right: 20%;
+  width: 40%;
+  height: 40%;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
+  filter: blur(30px);
+  pointer-events: none;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
 }
 
 @media (max-width: 768px) {
-  .title {
-    font-size: 2.5rem;
+  .hero {
+    min-height: 70vh;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .ctaGroup {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

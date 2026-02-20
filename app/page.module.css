@@ -232,8 +232,9 @@
   .heroInner {
     flex-direction: column;
     text-align: center;
-    gap: 40px;
+    gap: 60px;
     justify-content: center;
+    padding-top: 60px;
   }
 
   .heroContent {
@@ -244,12 +245,9 @@
 
   .heroImageContainer {
     width: 100%;
-    height: 400px;
+    height: clamp(350px, 50vh, 500px);
     justify-content: center;
-  }
-
-  .heroImageContainer::after {
-    background: radial-gradient(circle, transparent 40%, var(--background) 95%);
+    margin-top: 20px;
   }
 
   .grid {
@@ -257,6 +255,7 @@
     gap: 32px;
   }
 }
+
 
 
 @media (max-width: 768px) {

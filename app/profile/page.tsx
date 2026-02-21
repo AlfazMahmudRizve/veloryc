@@ -152,8 +152,8 @@ export default function ProfilePage() {
                                         </span>
                                     </div>
                                     <div className={styles.orderDetails}>
-                                        <p className={styles.orderId}>ID: {order.transaction_id.slice(0, 8)}</p>
-                                        <p className={styles.orderAmount}>Total: ৳{order.total_amount.toLocaleString()}</p>
+                                        <p className={styles.orderId}>ID: {(order.transaction_id || order.id).slice(0, 8)}</p>
+                                        <p className={styles.orderAmount}>Total: ৳{order.total_amount?.toLocaleString()}</p>
                                     </div>
                                 </div>
                             ))}

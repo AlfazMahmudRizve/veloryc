@@ -50,10 +50,36 @@ export default function CheckoutPage() {
             const data = await response.json();
 
             if (data.success) {
-                // In real app: window.location.href = data.GatewayPageURL;
-                alert(`Order Created! (ID: ${data.tran_id})\n\nSince this is a sandbox without real SSLCommerz keys, I'm redirecting you to a mock success page.`);
-                window.location.href = `/checkout/success?tran_id=${data.tran_id}`;
+                // In a real app with SSLCommerz keys: window.location.href = data.GatewayPageURL;
+
+                // For testing purposes (since we lack SSLCommerz keys):
+                // We simulate the gateway redirecting the user back by hitting our own success API
+                const confirmTest = window.confirm(`Order Created in Supabase (ID: ${data.tran_id})\n\nWould you like to simulate a SUCCESSFUL payment to test the Auto-Account creation logic?`);
+
+                if (confirmTest) {
+                    const formData = new FormData();
+                    formData.append('tran_id', data.tran_id);
+                    formData.append('status', 'VALID');
+                    formData.append('amount', total.toString());
+                    formData.append('bank_tran_id', 'MOCK-BANK-' + Date.now());
+
+                    // We need to use a form submission or a fetch that handles the redirect
+                    // Since the success route returns a 303 Redirect, we can use an actual form post or handle it manually
+                    const response = await fetch('/api/payment/success', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                    } else {
+                        window.location.href = `/checkout/success?tran_id=${data.tran_id}`;
+                    }
+                } else {
+                    window.location.href = `/checkout/fail`;
+                }
             } else {
+
                 alert('Failed to initialize payment: ' + data.error);
             }
         } catch (err) {

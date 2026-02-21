@@ -2,7 +2,7 @@
 
 import React, { Suspense } from 'react';
 import Link from 'next/link';
-import styles from './status.module.css';
+import styles from '../status.module.css';
 
 function FailContent() {
     return (

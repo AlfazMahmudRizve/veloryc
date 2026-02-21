@@ -4,7 +4,7 @@ import React, { useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useCartStore } from '@/lib/store';
 import Link from 'next/link';
-import styles from './status.module.css';
+import styles from '../status.module.css';
 
 function SuccessContent() {
     const searchParams = useSearchParams();

@@ -1,10 +1,22 @@
 import React from 'react';
-import { PRODUCTS } from '@/lib/data';
+import { PRODUCTS, mapDbToProduct } from '@/lib/data';
 import ProductCard from '@/components/ProductCard';
 import styles from './page.module.css';
+import { getSupabaseAdmin } from '@/lib/supabase';
 
-export default function ShopPage() {
-    const productsArray = Object.values(PRODUCTS);
+export default async function ShopPage() {
+    let productsArray = Object.values(PRODUCTS);
+
+    try {
+        const supabase = getSupabaseAdmin();
+        const { data } = await supabase.from('products').select('*').order('name');
+
+        if (data && data.length > 0) {
+            productsArray = data.map(mapDbToProduct);
+        }
+    } catch (err) {
+        console.error('Error fetching dynamic products:', err);
+    }
 
     return (
         <main className={styles.main}>

@@ -1,0 +1,186 @@
+.adminContainer {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh;
+    background-color: var(--background);
+    color: var(--foreground);
+}
+
+.sidebar {
+    background-color: var(--background-secondary);
+    border-right: 1px solid var(--navbar-border);
+    padding: 40px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.sidebarBrand {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--foreground);
+    text-decoration: none;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.navLink {
+    padding: 12px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--color-secondary);
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.navLink:hover,
+.navLink.active {
+    background-color: var(--navbar-border);
+    color: var(--foreground);
+}
+
+.content {
+    padding: 60px 40px;
+    overflow-y: auto;
+}
+
+.header {
+    margin-bottom: 40px;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: var(--color-secondary);
+}
+
+/* Stats Cards */
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-bottom: 60px;
+}
+
+.card {
+    background-color: var(--background-secondary);
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid var(--navbar-border);
+}
+
+.cardLabel {
+    font-size: 0.85rem;
+    color: var(--color-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+}
+
+.cardValue {
+    font-size: 1.75rem;
+    font-weight: 600;
+}
+
+.cardTrend {
+    margin-top: 12px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.cardTrend.up {
+    color: #10b981;
+}
+
+.cardTrend.down {
+    color: #ef4444;
+}
+
+/* Tables & Lists */
+.section {
+    margin-bottom: 60px;
+}
+
+.sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.sectionTitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.tableContainer {
+    background-color: var(--background-secondary);
+    border-radius: 12px;
+    border: 1px solid var(--navbar-border);
+    overflow: hidden;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    text-align: left;
+    padding: 16px 24px;
+    background-color: var(--navbar-border);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-secondary);
+    text-transform: uppercase;
+}
+
+.table td {
+    padding: 16px 24px;
+    border-top: 1px solid var(--navbar-border);
+    font-size: 0.95rem;
+}
+
+.status {
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.status.paid {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.status.pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.status.low {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+@media (max-width: 1024px) {
+    .adminContainer {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        display: none;
+        /* Add a toggle menu later */
+    }
+}

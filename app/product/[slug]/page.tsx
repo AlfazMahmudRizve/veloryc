@@ -1,15 +1,15 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
-import { PRODUCTS } from '@/lib/data';
+import { PRODUCTS, mapDbToProduct } from '@/lib/data';
 import styles from './page.module.css';
 import VariantSelector from '@/components/VariantSelector';
 import IngredientAccordion from '@/components/IngredientAccordion';
 import AddToCartButton from '@/components/AddToCartButton';
 import StickyATC from '@/components/StickyATC';
 import UGCGallery from '@/components/UGCGallery';
+import { getSupabaseAdmin } from '@/lib/supabase';
 
 // Using PageProps type for Next.js 15+ (App Router)
-// Ensure params is awaited if necessary in future versions, currently it's a promise in some configs but safe to treat as object in standard 14 setup unless dynamicIO
 interface PageProps {
     params: { slug: string };
 }
@@ -22,7 +22,22 @@ export async function generateStaticParams() {
 
 export default async function ProductPage(props: { params: Promise<{ slug: string }> }) {
     const params = await props.params;
-    const product = PRODUCTS[params.slug];
+    let product = PRODUCTS[params.slug];
+
+    try {
+        const supabase = getSupabaseAdmin();
+        const { data } = await supabase
+            .from('products')
+            .select('*')
+            .eq('slug', params.slug)
+            .single();
+
+        if (data) {
+            product = mapDbToProduct(data);
+        }
+    } catch (err) {
+        console.error('Error fetching dynamic product:', err);
+    }
 
     if (!product) {
         notFound();

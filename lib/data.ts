@@ -13,6 +13,7 @@ export interface Product {
     skinType: string[];
     usage: string;
     image: string;
+    stock?: number;
 }
 
 export const PRODUCTS: Record<string, Product> = {
@@ -86,3 +87,28 @@ export const PRODUCTS: Record<string, Product> = {
         image: 'https://images.unsplash.com/photo-1620916297397-a4a5402a3c6c?auto=format&fit=crop&w=800&q=80'
     }
 };
+
+// Helper to convert DB product to UI product
+export const mapDbToProduct = (dbProduct: any): Product => ({
+    id: dbProduct.id,
+    slug: dbProduct.slug,
+    name: dbProduct.name,
+    subtitle: dbProduct.category === 'vitamin-c' ? 'Radiance & Even Tone' :
+        dbProduct.category === 'hyaluronic' ? 'Deep Moisture & Plumping' :
+            dbProduct.category === 'niacinamide' ? 'Pore Refining & Oil Control' : 'Renew & Resurface',
+    description: dbProduct.description,
+    price: Number(dbProduct.price),
+    variance: dbProduct.category as VariantType,
+    activeIngredients: dbProduct.ingredients || [],
+    benefits: dbProduct.category === 'vitamin-c' ? ['Brightens', 'Firms', 'Protects'] :
+        dbProduct.category === 'hyaluronic' ? ['Hydrates', 'Plumps', 'Smoothes'] :
+            dbProduct.category === 'niacinamide' ? ['Clarifies', 'Balances', 'Refines Pores'] : ['Resurfaces', 'Smooths', 'Anti-Aging'],
+    skinType: dbProduct.category === 'vitamin-c' ? ['Dull', 'Uneven Tone', 'All Types'] :
+        dbProduct.category === 'hyaluronic' ? ['Dry', 'Dehydrated', 'Sensitive'] :
+            dbProduct.category === 'niacinamide' ? ['Oily', 'Combination', 'Acne-Prone'] : ['Normal', 'Dry', 'Mature'],
+    usage: dbProduct.category === 'vitamin-c' ? 'Apply 3-4 drops to clean face in the morning.' :
+        dbProduct.category === 'hyaluronic' ? 'Apply to damp skin morning and night.' :
+            dbProduct.category === 'niacinamide' ? 'Apply to entire face morning and evening.' : 'Apply small amount in the PM.',
+    image: dbProduct.image_url,
+    stock: dbProduct.stock
+});

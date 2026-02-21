@@ -52,35 +52,26 @@ export default function CheckoutPage() {
             if (data.success) {
                 // In a real app with SSLCommerz keys: window.location.href = data.GatewayPageURL;
 
-                // For testing purposes (since we lack SSLCommerz keys):
-                // We simulate the gateway redirecting the user back by hitting our own success API
-                const confirmTest = window.confirm(`Order Created in Supabase (ID: ${data.tran_id})\n\nWould you like to simulate a SUCCESSFUL payment to test the Auto-Account creation logic?`);
+                // For testing/simulation (since we lack SSLCommerz keys/production env):
+                // We automatically simulate the success callback to ensure the Auto-Account logic runs
+                const formData = new FormData();
+                formData.append('tran_id', data.tran_id);
+                formData.append('status', 'VALID');
+                formData.append('amount', total.toString());
+                formData.append('bank_tran_id', 'AUTO-SIM-' + Date.now());
 
-                if (confirmTest) {
-                    const formData = new FormData();
-                    formData.append('tran_id', data.tran_id);
-                    formData.append('status', 'VALID');
-                    formData.append('amount', total.toString());
-                    formData.append('bank_tran_id', 'MOCK-BANK-' + Date.now());
+                const successResponse = await fetch('/api/payment/success', {
+                    method: 'POST',
+                    body: formData
+                });
 
-                    // We need to use a form submission or a fetch that handles the redirect
-                    // Since the success route returns a 303 Redirect, we can use an actual form post or handle it manually
-                    const response = await fetch('/api/payment/success', {
-                        method: 'POST',
-                        body: formData
-                    });
-
-                    if (response.redirected) {
-                        window.location.href = response.url;
-                    } else {
-                        window.location.href = `/checkout/success?tran_id=${data.tran_id}`;
-                    }
+                if (successResponse.redirected) {
+                    window.location.href = successResponse.url;
                 } else {
-                    window.location.href = `/checkout/fail`;
+                    window.location.href = `/checkout/success?tran_id=${data.tran_id}`;
                 }
             } else {
-
-                alert('Failed to initialize payment: ' + data.error);
+                alert('Failed to initialize order: ' + data.error);
             }
         } catch (err) {
             console.error(err);

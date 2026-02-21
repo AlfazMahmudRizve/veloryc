@@ -7,6 +7,23 @@
     background-color: var(--background);
 }
 
+.dashboardGrid {
+    max-width: 1200px;
+    width: 100%;
+    padding: 80px 24px;
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .dashboardGrid {
+        grid-template-columns: 1fr;
+        padding-top: 40px;
+    }
+}
+
 .container {
     max-width: 480px;
     width: 100%;
@@ -92,4 +109,115 @@
 .logoutBtn:hover {
     background-color: var(--color-accent-ret);
     color: white;
+}
+
+/* Order History Section */
+.orderSection {
+    background-color: var(--background-secondary);
+    padding: 40px;
+    border-radius: 12px;
+    border: 1px solid var(--navbar-border);
+}
+
+.sectionTitle {
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+    font-weight: 500;
+}
+
+.orderList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.orderCard {
+    background-color: var(--background);
+    padding: 24px;
+    border-radius: 8px;
+    border: 1px solid var(--navbar-border);
+    transition: transform 0.2s ease;
+}
+
+.orderCard:hover {
+    transform: translateY(-2px);
+}
+
+.orderHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.orderDate {
+    font-size: 0.9rem;
+    color: var(--color-secondary);
+}
+
+.statusBadge {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-weight: 600;
+}
+
+.statusBadge.valid,
+.statusBadge.completed {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.statusBadge.pending {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.statusBadge.failed {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.orderDetails {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+}
+
+.orderId {
+    color: var(--color-secondary);
+}
+
+.orderAmount {
+    font-weight: 600;
+}
+
+.emptyOrders {
+    text-align: center;
+    padding: 60px 0;
+    color: var(--color-secondary);
+}
+
+.footerText {
+    margin-top: 24px;
+    font-size: 0.8rem;
+    color: var(--color-secondary);
+}
+
+.loadingSpinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--navbar-border);
+    border-top-color: var(--foreground);
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
 }

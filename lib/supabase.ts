@@ -3,16 +3,18 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
-if (!supabaseUrl || !supabaseAnonKey) {
-    console.error('Supabase environment variables are missing! Please ensure NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY are set in your .env.local file in the veloryc directory.');
-}
+// Basic Supabase client
+export const supabase = (supabaseUrl && supabaseAnonKey)
+    ? createClient(supabaseUrl, supabaseAnonKey)
+    : null as any;
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
-
-
-// Admin client for restricted operations like auto-creating users after payment
+// Admin client for restricted operations (only available on server-side)
 export const getSupabaseAdmin = () => {
     const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+    if (!supabaseUrl || !serviceRoleKey) {
+        console.warn('Supabase Admin credentials missing. Skipping client initialization.');
+        return null as any;
+    }
     return createClient(supabaseUrl, serviceRoleKey, {
         auth: {
             autoRefreshToken: false,

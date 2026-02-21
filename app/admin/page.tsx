@@ -48,31 +48,38 @@ export default function AdminDashboard() {
     const fetchDashboardData = async () => {
         setLoading(true);
 
-        // 1. Fetch Stats
-        const { data: orders } = await supabase.from('orders').select('total, status');
-        const { data: products } = await supabase.from('products').select('stock, name');
+        try {
+            // 1. Fetch Stats
+            const { data: orders } = await supabase.from('orders').select('total, status');
+            const { data: products } = await supabase.from('products').select('stock, name');
 
-        const totalRevenue = orders?.filter(o => o.status === 'paid' || o.status === 'VALID').reduce((acc, curr) => acc + Number(curr.total), 0) || 0;
-        const totalOrders = orders?.length || 0;
-        const lowStockProducts = products?.filter(p => p.stock < 10) || [];
+            const totalRevenue = orders?.filter((o: any) => o.status === 'paid' || o.status === 'VALID' || o.status === 'Paid')
+                .reduce((acc: number, curr: any) => acc + Number(curr.total), 0) || 0;
 
-        setStats({
-            totalRevenue,
-            totalOrders,
-            lowStockCount: lowStockProducts.length,
-            activeUsers: 0 // Placeholder
-        });
+            const totalOrdersCount = orders?.length || 0;
+            const lowStock = products?.filter((p: any) => p.stock < 10) || [];
 
-        // 2. Recent Orders
-        const { data: recent } = await supabase
-            .from('orders')
-            .select('*')
-            .order('created_at', { ascending: false })
-            .limit(5);
-        setRecentOrders(recent || []);
+            setStats({
+                totalRevenue,
+                totalOrders: totalOrdersCount,
+                lowStockCount: lowStock.length,
+                activeUsers: 0 // Placeholder
+            });
 
-        setLowStockProducts(lowStockProducts);
-        setLoading(false);
+            // 2. Recent Orders
+            const { data: recent } = await supabase
+                .from('orders')
+                .select('*')
+                .order('created_at', { ascending: false })
+                .limit(5);
+            setRecentOrders(recent || []);
+
+            setLowStockProducts(lowStock);
+        } catch (error) {
+            console.error('Error fetching dashboard data:', error);
+        } finally {
+            setLoading(false);
+        }
     };
 
     if (loading) return <div className={styles.content}>Loading Admin Engine...</div>;

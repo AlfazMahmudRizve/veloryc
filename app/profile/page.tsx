@@ -72,7 +72,7 @@ export default function ProfilePage() {
 
         fetchUserAndOrders();
 
-        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: any, session: any) => {
             console.log('Auth state changed:', _event, session?.user?.email);
             setUser(session?.user ?? null);
             if (session?.user) {
@@ -82,7 +82,7 @@ export default function ProfilePage() {
                     .select('*')
                     .eq('user_id', session.user.id)
                     .order('created_at', { ascending: false })
-                    .then(({ data }) => setOrders(data || []));
+                    .then(({ data }: { data: any }) => setOrders(data || []));
             }
         });
 

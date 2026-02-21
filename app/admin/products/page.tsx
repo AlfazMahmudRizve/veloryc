@@ -57,7 +57,7 @@ export default function AdminProducts() {
                     <Link href="/admin" className={styles.navLink}>Dashboard</Link>
                     <Link href="/admin/products" className={`${styles.navLink} ${styles.active}`}>Products & Stock</Link>
                     <Link href="/admin/orders" className={styles.navLink}>Orders</Link>
-                    <Link href="/profile" className={styles.navLink}>Settings</Link>
+                    <Link href="/profile?settings=true" className={styles.navLink}>Settings</Link>
                 </nav>
             </aside>
 
@@ -94,7 +94,7 @@ export default function AdminProducts() {
                                             defaultValue={product.price}
                                             className={styles.inlineInput}
                                             onBlur={(e) => handleUpdatePrice(product.id, Number(e.target.value))}
-                                            style={{ width: '100px', padding: '4px 8px', borderRadius: '4px', border: '1px solid var(--navbar-border)' }}
+                                            style={{ width: '100px' }}
                                         />
                                     </td>
                                     <td>
@@ -105,9 +105,6 @@ export default function AdminProducts() {
                                             onBlur={(e) => handleUpdateStock(product.id, Number(e.target.value))}
                                             style={{
                                                 width: '80px',
-                                                padding: '4px 8px',
-                                                borderRadius: '4px',
-                                                border: '1px solid var(--navbar-border)',
                                                 color: product.stock < 10 ? '#ef4444' : 'inherit'
                                             }}
                                         />

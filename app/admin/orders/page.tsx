@@ -44,7 +44,7 @@ export default function AdminOrders() {
                     <Link href="/admin" className={styles.navLink}>Dashboard</Link>
                     <Link href="/admin/products" className={styles.navLink}>Products & Stock</Link>
                     <Link href="/admin/orders" className={`${styles.navLink} ${styles.active}`}>Orders</Link>
-                    <Link href="/profile" className={styles.navLink}>Settings</Link>
+                    <Link href="/profile?settings=true" className={styles.navLink}>Settings</Link>
                 </nav>
             </aside>
 
@@ -88,7 +88,7 @@ export default function AdminOrders() {
                                         <select
                                             value={order.status}
                                             onChange={(e) => handleStatusChange(order.id, e.target.value)}
-                                            style={{ padding: '6px', borderRadius: '4px', border: '1px solid var(--navbar-border)', background: 'var(--background)' }}
+                                            className={styles.actionSelect}
                                         >
                                             <option value="pending">Pending</option>
                                             <option value="paid">Paid/Valid</option>

@@ -5,6 +5,7 @@ import { supabase } from '@/lib/supabase';
 import { User } from '@supabase/supabase-js';
 import styles from './page.module.css';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface Order {
     id: string;
@@ -15,6 +16,7 @@ interface Order {
 }
 
 export default function ProfilePage() {
+    const router = useRouter();
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
     const [orders, setOrders] = useState<Order[]>([]);
@@ -44,11 +46,14 @@ export default function ProfilePage() {
                         .select('is_admin')
                         .eq('id', user.id)
                         .single();
-                    if (profile?.is_admin) {
+
+                    // Only redirect to admin if they are NOT intentionally visiting the profile/settings
+                    const params = new URLSearchParams(window.location.search);
+                    if (profile?.is_admin && !params.get('settings')) {
                         router.push('/admin');
                         return;
                     }
-                    setIsAdmin(false);
+                    setIsAdmin(!!profile?.is_admin);
                 }
 
                 // Fetch orders for this user

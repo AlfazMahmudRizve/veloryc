@@ -86,7 +86,7 @@ export default function AdminDashboard() {
                     <Link href="/admin" className={`${styles.navLink} ${styles.active}`}>Dashboard</Link>
                     <Link href="/admin/products" className={styles.navLink}>Products & Stock</Link>
                     <Link href="/admin/orders" className={styles.navLink}>Orders</Link>
-                    <Link href="/profile" className={styles.navLink}>Settings</Link>
+                    <Link href="/profile?settings=true" className={styles.navLink}>Settings</Link>
                 </nav>
             </aside>
 

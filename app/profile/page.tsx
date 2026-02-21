@@ -10,8 +10,8 @@ interface Order {
     id: string;
     created_at: string;
     status: string;
-    total_amount: number;
-    transaction_id: string;
+    total: number;
+    tran_id: string;
 }
 
 export default function ProfilePage() {
@@ -152,8 +152,8 @@ export default function ProfilePage() {
                                         </span>
                                     </div>
                                     <div className={styles.orderDetails}>
-                                        <p className={styles.orderId}>ID: {(order.transaction_id || order.id).slice(0, 8)}</p>
-                                        <p className={styles.orderAmount}>Total: ৳{order.total_amount?.toLocaleString()}</p>
+                                        <p className={styles.orderId}>ID: {(order.tran_id || order.id).slice(0, 8)}</p>
+                                        <p className={styles.orderAmount}>Total: ৳{order.total?.toLocaleString()}</p>
                                     </div>
                                 </div>
                             ))}

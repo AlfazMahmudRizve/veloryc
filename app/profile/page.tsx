@@ -23,6 +23,7 @@ export default function ProfilePage() {
     const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
     const [method, setMethod] = useState<'google' | 'email'>('google');
     const [authError, setAuthError] = useState<string | null>(null);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => {
         const fetchUserAndOrders = async () => {
@@ -35,6 +36,16 @@ export default function ProfilePage() {
             } else {
                 console.log('User session found:', user?.email);
                 setUser(user);
+
+                // Check Admin Status
+                if (user) {
+                    const { data: profile } = await supabase
+                        .from('profiles')
+                        .select('is_admin')
+                        .eq('id', user.id)
+                        .single();
+                    setIsAdmin(!!profile?.is_admin);
+                }
 
                 // Fetch orders for this user
                 if (user) {
@@ -216,6 +227,15 @@ export default function ProfilePage() {
                             <span className={styles.value}>{user.email}</span>
                         </div>
                     </div>
+
+                    {isAdmin && (
+                        <Link href="/admin" className={styles.adminBtn}>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ marginRight: '8px' }}>
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                            </svg>
+                            Go to Admin Panel
+                        </Link>
+                    )}
 
                     <button className={styles.logoutBtn} onClick={handleLogout}>Sign Out</button>
                 </div>

@@ -4,6 +4,8 @@ import React from 'react';
 import styles from './CartDrawer.module.css';
 import { useCartStore } from '@/lib/store';
 import Image from 'next/image';
+import Link from 'next/link';
+
 
 function CartItems() {
     const items = useCartStore((state) => state.items);
@@ -62,7 +64,9 @@ export default function CartDrawer() {
                         <span>Subtotal</span>
                         <CartTotal />
                     </div>
-                    <button className={styles.checkoutBtn}>Checkout</button>
+                    <Link href="/checkout" onClick={closeCart} className={styles.checkoutBtn}>
+                        Checkout
+                    </Link>
                 </div>
             </div >
         </>

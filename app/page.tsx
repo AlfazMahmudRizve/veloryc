@@ -7,6 +7,8 @@ import Newsletter from "@/components/Newsletter";
 
 import Link from "next/link";
 
+import ProductCard from "@/components/ProductCard";
+
 export default function Home() {
   return (
     <main className={styles.main}>
@@ -50,47 +52,10 @@ export default function Home() {
       <section className="section container">
         <h2 className={styles.sectionTitle}>Featured Variances</h2>
         <div className={styles.grid}>
-          {/* Placeholders for products */}
-
-          <Link href="/product/vitamin-c-serum" className={styles.card}>
-            <div className={`${styles.imagePlaceholder} ${styles.accentC}`}>
-              <Image
-                src={PRODUCTS['vitamin-c-serum'].image}
-                alt="Vitamin C Serum"
-                fill
-                style={{ objectFit: 'cover' }}
-                sizes="(max-width: 768px) 100vw, 33vw"
-              />
-            </div>
-            <h3>Vitamin C Brightening</h3>
-            <p>৳ 5,800</p>
-          </Link>
-          <Link href="/product/hyaluronic-serum" className={styles.card}>
-            <div className={`${styles.imagePlaceholder} ${styles.accentHa}`}>
-              <Image
-                src={PRODUCTS['hyaluronic-serum'].image}
-                alt="Hyaluronic Serum"
-                fill
-                style={{ objectFit: 'cover' }}
-                sizes="(max-width: 768px) 100vw, 33vw"
-              />
-            </div>
-            <h3>Hyaluronic Hydration</h3>
-            <p>৳ 4,950</p>
-          </Link>
-          <Link href="/product/niacinamide-serum" className={styles.card}>
-            <div className={`${styles.imagePlaceholder} ${styles.accentNia}`}>
-              <Image
-                src={PRODUCTS['niacinamide-serum'].image}
-                alt="Niacinamide Serum"
-                fill
-                style={{ objectFit: 'cover' }}
-                sizes="(max-width: 768px) 100vw, 33vw"
-              />
-            </div>
-            <h3>Niacinamide Clarifying</h3>
-            <p>৳ 5,200</p>
-          </Link>
+          <ProductCard product={PRODUCTS['vitamin-c-serum']} accentClass="accentC" />
+          <ProductCard product={PRODUCTS['hyaluronic-serum']} accentClass="accentHa" />
+          <ProductCard product={PRODUCTS['niacinamide-serum']} accentClass="accentNia" />
+          <ProductCard product={PRODUCTS['retinol-serum']} />
         </div>
       </section>
 

@@ -114,120 +114,12 @@
 /* ─── Product Grid ─── */
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-}
-
-/* ─── Product Cards ─── */
-.card {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  cursor: pointer;
-  text-decoration: none;
-  color: inherit;
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.card h3 {
-  font-size: 1.1rem;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  transition: color 0.2s ease;
-}
-
-.card p {
-  font-size: 0.95rem;
-  color: var(--color-secondary);
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-}
-
-
-.card:hover h3 {
-  color: var(--color-text-primary);
-}
-
-.card:hover p {
-  color: var(--color-text-primary);
-}
-
-.imagePlaceholder {
-  width: 100%;
-  aspect-ratio: 3/4;
-  background-color: var(--background-secondary);
-  border-radius: 8px;
-  overflow: hidden;
-  position: relative;
-  transition: box-shadow 0.4s ease;
-}
-
-.card:hover .imagePlaceholder {
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-}
-
-.imagePlaceholder img {
-  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.card:hover .imagePlaceholder img {
-  transform: scale(1.05);
-}
-
-/* ─── Accent Gradients (Subtle) ─── */
-.accentC {
-  background: linear-gradient(160deg, #fffbf5 0%, #fff4e6 100%);
-}
-
-.accentC::after {
-  content: '';
-  position: absolute;
-  bottom: 15%;
-  right: 15%;
-  width: 50%;
-  height: 50%;
-  background: radial-gradient(circle, rgba(217, 119, 6, 0.08) 0%, transparent 70%);
-  filter: blur(30px);
-  pointer-events: none;
-}
-
-.accentHa {
-  background: linear-gradient(160deg, #f8fcff 0%, #eef7ff 100%);
-}
-
-.accentHa::after {
-  content: '';
-  position: absolute;
-  top: 15%;
-  left: 15%;
-  width: 50%;
-  height: 50%;
-  background: radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, transparent 70%);
-  filter: blur(30px);
-  pointer-events: none;
-}
-
-.accentNia {
-  background: linear-gradient(160deg, #f5fdf9 0%, #ecfdf5 100%);
-}
-
-.accentNia::after {
-  content: '';
-  position: absolute;
-  top: 20%;
-  right: 20%;
-  width: 40%;
-  height: 40%;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
-  filter: blur(30px);
-  pointer-events: none;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
 }
 
 /* ─── Responsive ─── */
+
 @media (max-width: 1024px) {
   .heroInner {
     flex-direction: column;

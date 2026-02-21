@@ -1,0 +1,92 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+    background-color: var(--background);
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.imageContainer {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: #f6f6f6;
+    /* Classic Adidas off-white background */
+    overflow: hidden;
+    border-radius: 2px;
+}
+
+.imageContainer img {
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover .imageContainer img {
+    transform: scale(1.05);
+}
+
+.wishlistBtn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 5;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+    color: var(--color-text-primary);
+}
+
+.wishlistBtn:hover {
+    transform: scale(1.1);
+}
+
+.cardInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.price {
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--color-text-primary);
+    margin: 0;
+}
+
+.title {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--color-text-primary);
+    margin: 0;
+    line-height: 1.4;
+}
+
+.brand {
+    font-size: 0.8rem;
+    color: var(--color-secondary);
+    font-weight: 400;
+    margin-top: 2px;
+}
+
+/* Specific accent backgrounds if needed */
+.accentC {
+    background-color: #fffbf5;
+}
+
+.accentHa {
+    background-color: #f8fcff;
+}
+
+.accentNia {
+    background-color: #f5fdf9;
+}

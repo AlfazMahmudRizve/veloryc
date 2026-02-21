@@ -44,7 +44,11 @@ export default function ProfilePage() {
                         .select('is_admin')
                         .eq('id', user.id)
                         .single();
-                    setIsAdmin(!!profile?.is_admin);
+                    if (profile?.is_admin) {
+                        router.push('/admin');
+                        return;
+                    }
+                    setIsAdmin(false);
                 }
 
                 // Fetch orders for this user
@@ -98,8 +102,22 @@ export default function ProfilePage() {
 
         try {
             if (authMode === 'login') {
-                const { error } = await supabase.auth.signInWithPassword({ email, password });
+                const { data, error } = await supabase.auth.signInWithPassword({ email, password });
                 if (error) throw error;
+
+                // Immediate check for admin redirect after login
+                if (data.user) {
+                    const { data: profile } = await supabase
+                        .from('profiles')
+                        .select('is_admin')
+                        .eq('id', data.user.id)
+                        .single();
+
+                    if (profile?.is_admin) {
+                        router.push('/admin');
+                        return;
+                    }
+                }
             } else {
                 const { error } = await supabase.auth.signUp({
                     email,

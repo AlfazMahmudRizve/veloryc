@@ -18,6 +18,11 @@ export default function ProfilePage() {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
     const [orders, setOrders] = useState<Order[]>([]);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
+    const [method, setMethod] = useState<'google' | 'email'>('google');
+    const [authError, setAuthError] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchUserAndOrders = async () => {
@@ -65,13 +70,41 @@ export default function ProfilePage() {
     }, []);
 
     const handleGoogleLogin = async () => {
+        setAuthError(null);
         const { error } = await supabase.auth.signInWithOAuth({
             provider: 'google',
             options: {
                 redirectTo: `${window.location.origin}/profile`
             }
         });
-        if (error) alert(error.message);
+        if (error) setAuthError(error.message);
+    };
+
+    const handleEmailAuth = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        setAuthError(null);
+
+        try {
+            if (authMode === 'login') {
+                const { error } = await supabase.auth.signInWithPassword({ email, password });
+                if (error) throw error;
+            } else {
+                const { error } = await supabase.auth.signUp({
+                    email,
+                    password,
+                    options: {
+                        data: { full_name: email.split('@')[0] }
+                    }
+                });
+                if (error) throw error;
+                alert('Success! Please check your email to confirm your account.');
+            }
+        } catch (err: any) {
+            setAuthError(err.message);
+        } finally {
+            setLoading(false);
+        }
     };
 
     const handleLogout = async () => {
@@ -93,20 +126,76 @@ export default function ProfilePage() {
             <main className={styles.main}>
                 <div className={styles.container}>
                     <h1 className={styles.title}>Account</h1>
-                    <p className={styles.subtitle}>Sign in to view your orders and manage your skin routine.</p>
+                    <p className={styles.subtitle}>
+                        {authMode === 'login' ? 'Welcome back to Veloryc.' : 'Join the Veloryc skincare community.'}
+                    </p>
 
-                    <button className={styles.googleBtn} onClick={handleGoogleLogin}>
-                        <svg width="20" height="20" viewBox="0 0 24 24">
-                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                            <path fill="#34A853" d="M12 23c3.08 0 5.68-1.02 7.57-2.77l-3.57-2.77c-1.01.68-2.31 1.09-4 1.09-3.08 0-5.68-2.08-6.61-4.88H1.67v3.01C3.54 20.35 7.49 23 12 23z" />
-                            <path fill="#FBBC05" d="M5.39 13.67C5.15 12.92 5 12.13 5 11.33c0-.8.15-1.59.39-2.34V5.98H1.67C.6 8.08 0 10.43 0 12.92s.6 4.84 1.67 6.94l3.72-3.04.1.85z" />
-                            <path fill="#EA4335" d="M12 5.07c1.67 0 3.17.58 4.35 1.71l3.27-3.27C17.68 1.5 15.08.5 12 .5c-4.51 0-8.46 2.65-10.33 6.44l3.72 3.04C6.32 7.15 8.92 5.07 12 5.07z" />
-                        </svg>
-                        Sign in with Google
-                    </button>
+                    <div className={styles.methodToggle}>
+                        <button
+                            className={`${styles.toggleBtn} ${method === 'google' ? styles.active : ''}`}
+                            onClick={() => setMethod('google')}
+                        >
+                            Google
+                        </button>
+                        <button
+                            className={`${styles.toggleBtn} ${method === 'email' ? styles.active : ''}`}
+                            onClick={() => setMethod('email')}
+                        >
+                            Email
+                        </button>
+                    </div>
+
+                    {method === 'google' ? (
+                        <button className={styles.googleBtn} onClick={handleGoogleLogin}>
+                            <svg width="20" height="20" viewBox="0 0 24 24">
+                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                <path fill="#34A853" d="M12 23c3.08 0 5.68-1.02 7.57-2.77l-3.57-2.77c-1.01.68-2.31 1.09-4 1.09-3.08 0-5.68-2.08-6.61-4.88H1.67v3.01C3.54 20.35 7.49 23 12 23z" />
+                                <path fill="#FBBC05" d="M5.39 13.67C5.15 12.92 5 12.13 5 11.33c0-.8.15-1.59.39-2.34V5.98H1.67C.6 8.08 0 10.43 0 12.92s.6 4.84 1.67 6.94l3.72-3.04.1.85z" />
+                                <path fill="#EA4335" d="M12 5.07c1.67 0 3.17.58 4.35 1.71l3.27-3.27C17.68 1.5 15.08.5 12 .5c-4.51 0-8.46 2.65-10.33 6.44l3.72 3.04C6.32 7.15 8.92 5.07 12 5.07z" />
+                            </svg>
+                            Sign in with Google
+                        </button>
+                    ) : (
+                        <form className={styles.authForm} onSubmit={handleEmailAuth}>
+                            <div className={styles.inputGroup}>
+                                <input
+                                    type="email"
+                                    placeholder="Email Address"
+                                    required
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    className={styles.input}
+                                />
+                            </div>
+                            <div className={styles.inputGroup}>
+                                <input
+                                    type="password"
+                                    placeholder="Password"
+                                    required
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    className={styles.input}
+                                />
+                            </div>
+
+                            {authError && <p className={styles.errorText}>{authError}</p>}
+
+                            <button type="submit" className={styles.submitBtn}>
+                                {authMode === 'login' ? 'Sign In' : 'Create Account'}
+                            </button>
+
+                            <button
+                                type="button"
+                                className={styles.switchBtn}
+                                onClick={() => setAuthMode(authMode === 'login' ? 'signup' : 'login')}
+                            >
+                                {authMode === 'login' ? "Don't have an account? Sign up" : "Already have an account? Sign in"}
+                            </button>
+                        </form>
+                    )}
 
                     <p className={styles.footerText}>
-                        Problems signing in? Ensure Google OAuth is enabled in Supabase.
+                        Problems signing in? Connect with our support team.
                     </p>
                 </div>
             </main>
